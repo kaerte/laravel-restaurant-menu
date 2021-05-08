@@ -36,7 +36,7 @@ class CreateMenusTable extends Migration
         Schema::create('dishes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->mediumText('description');
+            $table->mediumText('description')->nullable();
 
             $table->boolean('option_halal')->default(0);
             $table->boolean('option_vegetarian')->default(0);
