@@ -16,7 +16,7 @@ class MenuTest extends TestCase
 {
     use RefreshDatabase;
 
-    public User $addressable;
+    public User $menuable;
 
     public Menu $menu;
 
@@ -35,6 +35,8 @@ class MenuTest extends TestCase
                     )
                 ->count(3)
             )->create();
+
+        $this->menuable = User::factory()->create();
     }
 
     public function test_menu_has_sections(): void
@@ -50,5 +52,21 @@ class MenuTest extends TestCase
     public function test_dish_has_allergens(): void
     {
         self::assertCount(4, $this->menu->sections->first()->dishes->first()->allergens);
+    }
+
+    public function test_menuable_has_menus(): void
+    {
+        $menus = Menu::factory()->count(5)->create();
+        $this->menuable->menus()->saveMany($menus);
+
+        self::assertCount(5, $this->menuable->menus);
+    }
+
+    public function test_menu_has_menuable(): void
+    {
+        $menus = Menu::factory()->count(5)->create();
+        $this->menuable->menus()->saveMany($menus);
+
+        self::assertInstanceOf($this->menuable::class, $menus->first()->fresh()->menuable);
     }
 }
