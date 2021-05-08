@@ -25,7 +25,7 @@ class Menu extends Model
         'option_vegetarian',
     ];
 
-    protected $with = ['dishes'];
+    protected $with = ['sections'];
 
     protected $hidden = ['created_at', 'updated_at'];
 
