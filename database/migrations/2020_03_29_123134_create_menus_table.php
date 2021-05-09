@@ -21,8 +21,8 @@ class CreateMenusTable extends Migration
             $table->id();
             $table->timestamps();
             $table->nullableMorphs('menuable');
-            $table->timestamp('active_from');
-            $table->timestamp('active_to')->nullable();
+            $table->dateTime('active_from');
+            $table->dateTime('active_to')->nullable();
             $table->string('title')->nullable();
         });
 
@@ -35,18 +35,15 @@ class CreateMenusTable extends Migration
 
         Schema::create('dishes', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->string('name');
             $table->mediumText('description')->nullable();
-
             $table->boolean('option_halal')->default(0);
             $table->boolean('option_vegetarian')->default(0);
-
             $table->string('img_featured')->nullable();
             $table->string('img_1')->nullable();
             $table->string('img_2')->nullable();
             $table->string('img_3')->nullable();
-
-            $table->timestamps();
         });
 
         Schema::create('dish_section', function (Blueprint $table) {
