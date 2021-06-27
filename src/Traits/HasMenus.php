@@ -7,6 +7,7 @@ namespace Ctrlc\RestaurantMenu\Traits;
 use Carbon\Carbon;
 use Ctrlc\RestaurantMenu\Models\Menu;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 trait HasMenus
 {
@@ -29,15 +30,14 @@ trait HasMenus
             ->orderBy('active_from');
     }
 
-    public function menuToday(): ?Menu
+    public function menuToday(): MorphOne
     {
         $fromDate = now()->startOfDay();
         $toDate = $fromDate->copy()->endOfDay();
 
-        return $this->morphMany(Menu::class, 'menuable')
+        return $this->morphOne(Menu::class, 'menuable')
             ->whereBetween('active_from', [$fromDate, $toDate])
             ->whereBetween('active_to', [$fromDate, $toDate])
-            ->orderBy('active_from')
-            ->first();
+            ->orderBy('active_from');
     }
 }

@@ -72,7 +72,7 @@ class MenuForDaysTest extends TestCase
             });
 
         $this->menuable->menus()->saveMany($menus);
-        $todayMenu = $this->menuable->menuToday();
+        $todayMenu = $this->menuable->menuToday;
 
         self::assertSame($menus[0]->id, $todayMenu->id);
     }
@@ -90,7 +90,7 @@ class MenuForDaysTest extends TestCase
             });
 
         $this->menuable->menus()->saveMany($menus);
-        $todayMenu = $this->menuable->menuToday();
+        $todayMenu = $this->menuable->menuToday;
 
         self::assertSame(null, $todayMenu?->id);
     }
