@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ctrlc\RestaurantMenu\Tests;
 
-use CreateUsersTable;
 use Ctrlc\RestaurantMenu\Providers\RestaurantMenuServiceProvider;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
